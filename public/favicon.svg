@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Glint">
+  <rect width="64" height="64" rx="12" fill="#080808"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="miter">
+    <path d="M12 28V16h12"/>
+    <path d="M24 48H12V36"/>
+    <path d="M52 36v12H40"/>
+  </g>
+  <rect x="21" y="29" width="22" height="6" rx="3" fill="#FFFFFF"/>
+  <path d="M52 6q2 8 10 10-8 2-10 10-2-8-10-10 8-2 10-10z" fill="#FFB020"/>
+</svg>

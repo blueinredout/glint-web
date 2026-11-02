@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080808" />
+    <meta name="description" content="Glint brings text recognition, search, screenshots, and image search to anything on your Windows screen with one shortcut." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/outfit-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <title>Glint | Drag, done. That simple.</title>
+    <noscript><style>.intro,.skip-intro{display:none!important}.site{opacity:1!important;visibility:visible!important}body{overflow:auto!important}</style></noscript>
+  </head>
+  <body class="intro-active">
+    <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <symbol id="glint-mark" viewBox="0 0 64 64">
+        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="miter">
+          <path d="M12 28V16h12" />
+          <path d="M24 48H12V36" />
+          <path d="M52 36v12H40" />
+        </g>
+        <rect x="21" y="29" width="22" height="6" rx="3" fill="currentColor" />
+        <path d="M52 6q2 8 10 10-8 2-10 10-2-8-10-10 8-2 10-10z" fill="#FFB020" />
+      </symbol>
+      <symbol id="windows-mark" viewBox="0 0 24 24">
+        <path d="M2 4.8 10.5 3.6v8H2v-6.8Zm10.2-1.4L22 2v9.6h-9.8V3.4ZM2 13.3h8.5v8L2 20.1v-6.8Zm10.2 0H22V22l-9.8-1.4v-7.3Z" fill="currentColor" />
+      </symbol>
+    </svg>
+
+    <a class="skip-intro" id="skip-intro" href="#main-content">
+      <span>skip</span>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m5 3 5 5-5 5M11 3v10" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+    </a>
+
+    <div class="intro" id="intro">
+      <div class="intro__stage">
+        <button class="intro__logo" id="intro-logo" type="button" aria-label="Select the Glint logo">
+          <svg viewBox="0 0 64 64" role="img" aria-label="Glint"><use href="#glint-mark" /></svg>
+        </button>
+        <p class="intro__prompt" id="intro-prompt">Drag a selection around the mark</p>
+      </div>
+      <div class="selection" id="selection" aria-hidden="true">
+        <canvas id="selection-canvas"></canvas>
+        <span class="selection__corner selection__corner--tl"></span>
+        <span class="selection__corner selection__corner--br"></span>
+      </div>
+      <div class="intro-quote quote-type" id="intro-quote" aria-hidden="true">
+        <span class="quote-line"><span>Drag, done.</span></span>
+        <span class="quote-line"><span>That simple.</span></span>
+      </div>
+      <p class="sr-only" id="intro-status" aria-live="polite"></p>
+    </div>
+
+    <div class="site" id="site">
+      <header class="nav shell">
+        <a class="brand" href="#top" aria-label="Glint home">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#glint-mark" /></svg>
+          <span>glint</span>
+        </a>
+        <nav class="nav__links" aria-label="Main navigation">
+          <a href="#actions">How it works</a>
+          <a href="#accuracy">Accuracy</a>
+          <a href="#customize">Customize</a>
+        </nav>
+        <a
+          class="nav__download"
+          href="https://github.com/blueinredout/glint-releases/releases/latest/download/Glint-Setup.exe"
+          data-download
+        >Download <span>v<data data-release-version value="0.1.0">0.1.0</data></span></a>
+      </header>
+
+      <main id="main-content">
+        <section class="hero shell" id="top" aria-labelledby="hero-title">
+          <h1 class="hero__title quote-type" id="hero-title">
+            <span class="quote-line"><span>Drag, done.</span></span>
+            <span class="quote-line"><span>That simple.</span></span>
+          </h1>
+          <div class="hero__bottom">
+            <div class="hero__copy" data-hero-reveal>
+              <p>Versatile search and OCR for your entire Windows PC. Copy text, search the web, take a screenshot, or run an image search, all with one gesture.</p>
+              <div class="hero__actions">
+                <a class="button button--light" href="https://github.com/blueinredout/glint-releases/releases/latest/download/Glint-Setup.exe" data-download>
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v11m-4-4 4 4 4-4M3 16h14" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+                  Download Glint
+                </a>
+                <a class="text-button" href="https://github.com/blueinredout/glint-releases/releases" data-changelog>Changelog</a>
+              </div>
+              <p class="hero__meta">Version <data data-release-version value="0.1.0">0.1.0</data> <span>·</span> Windows 10 or newer</p>
+            </div>
+            <div class="shortcut-visual" id="shortcut-visual" data-hero-reveal aria-label="Windows, Shift, and X shortcut">
+              <canvas id="particle-canvas" aria-hidden="true"></canvas>
+              <div class="shortcut-visual__frame" aria-hidden="true"></div>
+              <div class="shortcut-keys" aria-hidden="true">
+                <span class="key key--win"><svg viewBox="0 0 24 24"><use href="#windows-mark" /></svg></span>
+                <span class="key-plus">+</span>
+                <span class="key">Shift</span>
+                <span class="key-plus">+</span>
+                <span class="key">X</span>
+              </div>
+              <p>One shortcut. Every tool.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="actions section" id="actions" aria-labelledby="actions-title">
+          <div class="shell">
+            <div class="section-heading" data-reveal>
+              <h2 id="actions-title">One drag<br />can do <em>a lot.</em></h2>
+              <p>Press the shortcut, hold a modifier, and select your subject. Glint does the rest.</p>
+            </div>
+            <div class="action-list" data-reveal-group>
+              <div class="action-highlight" aria-hidden="true"></div>
+              <div class="action-row is-active" data-action="none">
+                <div class="action-row__modifier"><span class="plain-key">No modifier</span></div>
+                <h3>Copy text</h3>
+                <p>Text in your selection is recognized and ready to paste.</p>
+              </div>
+              <div class="action-row" data-action="shift">
+                <div class="action-row__modifier"><kbd>Shift</kbd></div>
+                <h3>Search text</h3>
+                <p>Turn the selected words into a web search.</p>
+              </div>
+              <div class="action-row" data-action="ctrl">
+                <div class="action-row__modifier"><kbd>Ctrl</kbd></div>
+                <h3>Take a screenshot</h3>
+                <p>Capture exactly the area you dragged over.</p>
+              </div>
+              <div class="action-row" data-action="both">
+                <div class="action-row__modifier"><kbd>Ctrl</kbd><span>+</span><kbd>Shift</kbd></div>
+                <h3>Search by image</h3>
+                <p>Search for anything visible on screen, as an image.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="accuracy section" id="accuracy" aria-labelledby="accuracy-title">
+          <div class="shell accuracy__layout">
+            <div data-reveal>
+              <h2 id="accuracy-title">Built to<br />read it right.</h2>
+              <svg class="accuracy__mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#glint-mark" /></svg>
+            </div>
+            <div class="accuracy__copy" data-reveal>
+              <p>Windows OCR leaves accuracy on the table. Glint runs dedicated ONNX models for text detection and recognition.</p>
+              <div class="accuracy__note">
+                <h3>More model choices coming soon</h3>
+                <p>Optional custom OCR support is on the way.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="customize section" id="customize" aria-labelledby="customize-title">
+          <div class="shell customize__layout">
+            <div data-reveal>
+              <h2 id="customize-title">Make the<br />gesture yours.</h2>
+            </div>
+            <div class="customize__copy" data-reveal>
+              <p>Keep the defaults or change them. Your tools should work the way you do.</p>
+              <ul>
+                <li>Choose the Glint shortcut</li>
+                <li>Set which action is default</li>
+                <li>Pick your own search engine</li>
+                <li>Choose where screenshots go</li>
+                <li>&hellip;and more.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="download section" id="download" aria-labelledby="download-title">
+          <div class="shell download__inner" data-reveal>
+            <h2 id="download-title">Your screen,<br />now selectable.</h2>
+            <div class="download__actions">
+              <a class="button button--light" href="https://github.com/blueinredout/glint-releases/releases/latest/download/Glint-Setup.exe" data-download>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v11m-4-4 4 4 4-4M3 16h14" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+                Download for Windows
+              </a>
+              <a class="text-button" href="https://github.com/blueinredout/glint-releases/releases" data-changelog>View changelog</a>
+              <p>Glint v<data data-release-version value="0.1.0">0.1.0</data> <span>·</span> Windows 10 or newer.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer shell">
+        <a class="brand" href="#top" aria-label="Back to top">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#glint-mark" /></svg>
+          <span>glint</span>
+        </a>
+        <p>Select anything. Do something with it.</p>
+        <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
